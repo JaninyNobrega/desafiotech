@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cálculo de Juros Compostos</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="card">
+  <h2>Calculadora de Juros Compostos</h2>
+
+  <form id="formulario">
+    <label for="capital">Capital Inicial (R$):</label>
+    <input type="number" id="capital" required><br><br>
+
+    <label for="taxa">Taxa de Juros (%):</label>
+    <input type="number" id="taxa" required><br><br>
+
+    <label for="tempo">Tempo (meses):</label>
+    <input type="number" id="tempo" required><br><br>
+
+    <button type="submit">Calcular</button>
+  </form>
+
+  <h3 id="resultado"></h3>
+    </div>
+
+  <script>
+    function calcularJurosCompostos(capitalInicial, taxaJuros, tempo) {
+      const montante = capitalInicial * Math.pow(1 + taxaJuros / 100, tempo);
+      return montante.toFixed(2);
+    }
+
+    // Captura o formulário
+    document.getElementById("formulario").addEventListener("submit", function(e) {
+      e.preventDefault(); // evita recarregar a página
+
+      const capital = parseFloat(document.getElementById("capital").value);
+      const taxa = parseFloat(document.getElementById("taxa").value);
+      const tempo = parseInt(document.getElementById("tempo").value);
+
+      const resultado = calcularJurosCompostos(capital, taxa, tempo);
+
+      document.getElementById("resultado").innerText =
+        `Valor final do investimento: R$ ${resultado}`;
+    });
+  </script>
+</body>
+</html>
